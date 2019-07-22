@@ -1,8 +1,7 @@
-package vn.vissoft.employee.model;
+package vn.vissoft.employee.service;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.security.acl.Group;
 
 @Entity
 @Table(name = "employeesss")

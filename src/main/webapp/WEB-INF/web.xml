@@ -19,4 +19,19 @@
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
+    <!--<filter>
+        <filter-name>LoginFillter</filter-name>
+        <filter-class>vn.vissoft.employee.fillter.LoginFillter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFillter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+
+    <!-- By default go to secured welcome page -->
+    <welcome-file-list>
+        <welcome-file>employee-list.xhtml</welcome-file>
+        <welcome-file>employee-list.jsf</welcome-file>
+    </welcome-file-list>
+
 </web-app>

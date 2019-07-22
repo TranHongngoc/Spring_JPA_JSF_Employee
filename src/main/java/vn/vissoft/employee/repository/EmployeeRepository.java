@@ -1,6 +1,7 @@
 package vn.vissoft.employee.repository;
 
-import vn.vissoft.employee.model.Employee;
+
+import vn.vissoft.employee.service.Employee;
 
 import java.util.List;
 
@@ -8,6 +9,8 @@ import java.util.List;
 public interface EmployeeRepository {
 
     List findAll();
+
+    Employee findById(Long id);
 
     List findByName(String name, String employeeCode, String department, Double salaryFrom, Double salaryTo);
 

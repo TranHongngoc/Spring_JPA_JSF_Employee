@@ -11,8 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import vn.vissoft.employee.repository.EmployeeRepository;
 import vn.vissoft.employee.repository.EmployeeRepositoryImpl;
+import vn.vissoft.employee.repository.UserRepository;
+import vn.vissoft.employee.repository.UserRepositoryImpl;
 import vn.vissoft.employee.service.EmployeeService;
 import vn.vissoft.employee.service.EmployeeServiceImpl;
+import vn.vissoft.employee.service.UserService;
+import vn.vissoft.employee.service.UserServiceImpl;
 
 import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
@@ -37,18 +41,28 @@ public class EmployeeApplication extends SpringBootServletInitializer {
     }
 
     @Bean
+    public UserRepository userRepository(){
+        return new UserRepositoryImpl();
+    }
+
+    @Bean
+    public UserService userService(){
+        return new UserServiceImpl(userRepository());
+    }
+
+    @Bean
     public ServletRegistrationBean servletRegistrationBean() {
         FacesServlet servlet = new FacesServlet();
         return new ServletRegistrationBean(servlet, "*.jsf");
     }
 
-    @Bean
-    public FilterRegistrationBean rewriteFilter() {
-        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new RewriteFilter());
-        rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
-                DispatcherType.ASYNC, DispatcherType.ERROR));
-        rwFilter.addUrlPatterns("/*");
-        return rwFilter;
-    }
+//    @Bean
+//    public FilterRegistrationBean rewriteFilter() {
+//        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new RewriteFilter());
+//        rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
+//                DispatcherType.ASYNC, DispatcherType.ERROR));
+//        rwFilter.addUrlPatterns("/*");
+//        return rwFilter;
+//    }
 
 }

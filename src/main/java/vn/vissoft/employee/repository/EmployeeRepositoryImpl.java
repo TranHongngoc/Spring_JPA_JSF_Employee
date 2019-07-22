@@ -2,7 +2,8 @@ package vn.vissoft.employee.repository;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import vn.vissoft.employee.model.Employee;
+
+import vn.vissoft.employee.service.Employee;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +26,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
+    public Employee findById(Long id) {
+        Query query = entityManager.createQuery("select e FROM Employee e WHERE e.id= :id");
+        query.setParameter("id", id);
+        return (Employee) query.getResultList().stream().findFirst().orElse(null);
+    }
+
+    @Override
     public List<Employee> findByName(String name, String employeeCode, String department, Double salaryFrom, Double salaryTo) {
 
         String sql = "select e from Employee e where 1=1 ";
@@ -41,10 +49,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             sql = sql + " and (e.department like:department)";
         }
 
-        if (salaryFrom != null) {
+        if (salaryFrom != 0) {
             sql = sql + " and (e.salary >:salaryFrom )";
         }
-        if (salaryTo != null) {
+        if (salaryTo != 0) {
             sql = sql + " and (e.salary <:salaryTo )";
         }
 
@@ -60,15 +68,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             query.setParameter("department", "%" + department + "%");
         }
 
-        Double num1=null;
-        Double num2 = null;
-        if (salaryFrom != null) {
+        if (salaryFrom != 0) {
             query.setParameter("salaryFrom", salaryFrom);
-            // query.setParameter("num2", salary);
+
         }
-        if (salaryTo != null) {
+        if (salaryTo != 0) {
             query.setParameter("salaryTo", salaryTo);
-            // query.setParameter("num2", salary);
+
         }
 
         return query.getResultList();
@@ -80,19 +86,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         this.entityManager.persist(employee);
 
     }
-
-//    @Override
-//    @Transactional
-//    public void create(Employee employee) {
-//
-//        Query query = entityManager.createNativeQuery("INSERT INTO Employee (NAME, SALARY, DEPARTMENT  ) VALUES (?,?,?)",Employee.class);
-//        query.setParameter(1, employee.getName());
-//        query.setParameter(2, employee.getSalary());
-//        query.setParameter(3, employee.getDepartment());
-//        query.executeUpdate();
-////        entityManager.persist(employee);
-//
-//    }
 
 
     @Override

@@ -33,7 +33,10 @@
 
                 <tr>
                     <td>Date Start</td>
-                    <td><h:inputText id="dateStart" value="#{employeeController.employee.dateStart}"/></td>
+                    <td><h:inputText id="dateStart" value="#{employeeController.employee.dateStart}">
+                        <f:validateRegex pattern="([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}" />
+                    </h:inputText>
+                        <h:message for="employeeCode" style="color:red"/></td>
                 </tr>
 
                 <tr>

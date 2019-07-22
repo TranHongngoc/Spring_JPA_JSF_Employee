@@ -13,11 +13,17 @@
             <table>
                 <tr>
                     <td>Name</td>
-                    <td><h:inputText id="name" value="#{employeeController.employee.name}"/></td>
+                    <td><h:inputText id="name" value="#{employeeController.employee.name}" required="true">
+                        <f:validateLength minimum="2" maximum="20" />
+                    </h:inputText>
+                        <h:message for="name" style="color:red" /></td>
                 </tr>
                 <tr>
                     <td>Employee Code</td>
-                    <td><h:inputText id="employeeCode" value="#{employeeController.employee.employeeCode}"/></td>
+                    <td><h:inputText id="employeeCode" value="#{employeeController.employee.employeeCode}" required="true">
+                        <f:validateRegex pattern="[a-z0-9A-Z]{3,8}" />
+                    </h:inputText>
+                        <h:message for="employeeCode" style="color:red"/></td>
                 </tr>
 
                 <tr>
@@ -49,7 +55,10 @@
 
                 <tr>
                     <td>Salary</td>
-                    <td><h:inputText id="salary" value="#{employeeController.employee.salary}"/></td>
+                    <td><h:inputText id="salary" value="#{employeeController.employee.salary}" required="true">
+
+                    </h:inputText>
+                        <h:message for="salary" style="color:red" /></td>
                 </tr>
                 <tr>
                     <td><h:commandButton value="Save" action="#{employeeController.editEmployee(employeeController.employee)}"/></td>
