@@ -1,13 +1,12 @@
 package vn.vissoft.employee.model;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "usersss")
+@Table(name = "author")
 @SequenceGenerator(name="seq")
-public class User implements Serializable {
+public class author implements Serializable {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -17,18 +16,15 @@ public class User implements Serializable {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "authority")
+    private String authority;
 
-    @Column(name = "enable")
-    private Boolean enable;
-
-    public User() {
+    public author(String username, String authority) {
+        this.username = username;
+        this.authority = authority;
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public author() {
     }
 
     public Long getId() {
@@ -47,12 +43,11 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
-
 }

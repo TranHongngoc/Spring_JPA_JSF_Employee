@@ -28,9 +28,21 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
+    public List findNames() {
+        Query query = entityManager.createQuery("select e.username FROM Employee e");
+        return query.getResultList();
+    }
+
+    @Override
     public User findById(Long id) {
         Query query = entityManager.createQuery("select e FROM User e WHERE e.id= :id");
         query.setParameter("id", id);
+        return (User) query.getSingleResult();
+    }
+    @Override
+    public User findByName(String name) {
+        Query query = entityManager.createQuery("select e FROM User e WHERE e.username= :username");
+        query.setParameter("username", name);
         return (User) query.getSingleResult();
     }
 
@@ -46,6 +58,13 @@ public class UserRepositoryImpl implements UserRepository{
     public void update(User user) {
         entityManager.merge(user);
 
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        Query query = entityManager.createQuery("select e FROM User e WHERE e.username= :username");
+        query.setParameter("username", username);
+        return (User) query.getSingleResult();
     }
 
     @Override

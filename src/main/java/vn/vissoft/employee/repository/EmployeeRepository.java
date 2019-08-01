@@ -10,6 +10,7 @@ public interface EmployeeRepository {
 
     List findAll();
 
+
     Employee findById(Long id);
 
     List findByName(String name, String employeeCode, String department, Double salaryFrom, Double salaryTo);

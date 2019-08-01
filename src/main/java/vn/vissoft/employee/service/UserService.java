@@ -10,7 +10,10 @@ public interface UserService {
 
     List<User> findAll();
 
+    List<String> findNames();
+
     User findById(Long id);
+    User findByName(String name);
 
     void create(User user);
 

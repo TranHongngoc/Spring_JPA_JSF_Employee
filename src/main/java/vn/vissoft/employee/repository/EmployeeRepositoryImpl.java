@@ -25,6 +25,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     }
 
+
     @Override
     public Employee findById(Long id) {
         Query query = entityManager.createQuery("select e FROM Employee e WHERE e.id= :id");

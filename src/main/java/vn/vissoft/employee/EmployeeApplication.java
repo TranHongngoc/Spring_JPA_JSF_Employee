@@ -1,14 +1,13 @@
 package vn.vissoft.employee;
 
-import org.ocpsoft.rewrite.servlet.RewriteFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import vn.vissoft.employee.repository.EmployeeRepository;
 import vn.vissoft.employee.repository.EmployeeRepositoryImpl;
 import vn.vissoft.employee.repository.UserRepository;
@@ -19,8 +18,6 @@ import vn.vissoft.employee.service.UserService;
 import vn.vissoft.employee.service.UserServiceImpl;
 
 import javax.faces.webapp.FacesServlet;
-import javax.servlet.DispatcherType;
-import java.util.EnumSet;
 
 @EnableAutoConfiguration
 @ComponentScan({"vn.vissoft.employee"})
@@ -56,13 +53,7 @@ public class EmployeeApplication extends SpringBootServletInitializer {
         return new ServletRegistrationBean(servlet, "*.jsf");
     }
 
-//    @Bean
-//    public FilterRegistrationBean rewriteFilter() {
-//        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new RewriteFilter());
-//        rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
-//                DispatcherType.ASYNC, DispatcherType.ERROR));
-//        rwFilter.addUrlPatterns("/*");
-//        return rwFilter;
-//    }
+
+
 
 }
